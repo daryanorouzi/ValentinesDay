@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine 💗</title>
+
+<!-- Soft Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Aguafina+Script&family=Baskervville:ital,wght@0,400..700;1,400..700&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Pinyon+Script&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aguafina+Script&family=Baskervville:ital,wght@0,400..700;1,400..700&family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Pinyon+Script&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<style>
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #ffe8f2;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+/* Common layout */
+.screen {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.98);
+}
+
+/* First screen */
+h1 {
+    font-family: 'Pinyon Script', cursive;
+    color: #c1121f;
+    font-size: 42px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    animation: fadeIn 2s ease forwards;
+}
+
+button {
+    padding: 12px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#yesBtn {
+    background-color: #c1121f;
+    color: white;
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    background-color: white;
+    color: #c1121f;
+    position: absolute;
+}
+
+/* Second screen */
+.photo-container {
+    width: 700px;
+    height: 399px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    animation: fadeUp 1.5s ease forwards;
+}
+
+.photo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.love-text {
+    max-width: 300px;
+    color: #c1121f;
+    font-family: google sans flex, sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 0;
+    animation: fadeUp 1.5s ease forwards;
+    animation-delay: 0.5s;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+/* Floating soft hearts */
+.heart {
+    position: absolute;
+    color: #ff4d6d;
+    font-size: 16px;
+    opacity: 0.4;
+    animation: float 7s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 0.4; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- First Screen -->
+<div id="screen1" class="screen">
+    <h1>Would you be my Valentine? ❤️</h1>
+    <div>
+        <button id="yesBtn">Yes 💌</button>
+        <button id="noBtn">No</button>
+    </div>
+</div>
+
+<!-- Second Screen -->
+<div id="screen2" class="screen hidden">
+    <div class="photo-container">
+        <!-- 👇 اینجا عکس خودتو بذار -->
+        <img src="images/valentine.png" alt="Us" width="1000" height="669">
+    
+    </div>
+
+    <div class="love-text">
+        Okay… I see you chose to be my Valentine for the third year in a row.
+    I just want to say how much I love you.
+    Thank you for standing by my side, in the easy days and in the hardest ones.
+    You are my moon, my heart, and the warmth within it. Happy Valentine My Love💗
+    </div>
+</div>
+
+<script>
+
+// Yes transition
+document.getElementById("yesBtn").addEventListener("click", function() {
+    document.getElementById("screen1").classList.add("hidden");
+    setTimeout(() => {
+        document.getElementById("screen2").classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+    }, 600);
+});
+
+// No button runs away
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", function() {
+    const x = Math.random() * 300 - 150;
+    const y = Math.random() * 200 - 100;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "♥";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 7000);
+}
+
+setInterval(createHeart, 900);
+
+</script>
+
+</body>
+</html>
